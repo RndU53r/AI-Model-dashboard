@@ -293,6 +293,28 @@
   .ag-trust{font-size:12.5px;line-height:1.5;margin:0}
 
   /* ===== agent compare v3 (matrix, needs, ring) ===== */
+  .mx-wrap{overflow:auto;max-height:72vh;border:1px solid var(--line);border-radius:16px;background:var(--panel);margin-bottom:12px}
+  table.mx{border-collapse:separate;border-spacing:0;min-width:100%;width:max-content}
+  table.mx th,table.mx td{padding:10px 8px;text-align:center;border-bottom:1px solid var(--line);min-width:112px;box-sizing:border-box;background:var(--panel)}
+  table.mx thead th{position:sticky;top:0;z-index:3;border-bottom:2px solid var(--line);vertical-align:top}
+  table.mx th:first-child,table.mx td:first-child{position:sticky;left:0;z-index:2;text-align:left;min-width:190px;border-right:1px solid var(--line)}
+  table.mx thead th:first-child{z-index:4;vertical-align:bottom;color:var(--muted);font-size:13px}
+  table.mx .rec{background:rgba(79,124,240,.10)}
+  table.mx tr.mxneed td:first-child{background:rgba(79,124,240,.14);box-shadow:inset 3px 0 0 var(--accent)}
+  table.mx tr.mxneed td:not(:first-child){background-image:linear-gradient(rgba(79,124,240,.05),rgba(79,124,240,.05))}
+  table.mx tr.grp td{background:var(--panel2);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:700}
+  table.mx .hd{display:flex;flex-direction:column;align-items:center;gap:6px}
+  table.mx .nm{font-size:13px}
+  table.mx .vd{font-size:11.5px;color:var(--muted);font-weight:400}
+  .mxi{width:24px;height:24px;display:inline-block;vertical-align:middle}
+  .mxno{color:var(--muted);font-weight:700}
+  .mxs{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:5px 0}
+  .mxn{flex:0 0 190px;font-size:13.5px;font-weight:600}
+  .mxq{display:flex;gap:4px}
+  .mxsq{width:20px;height:20px;border-radius:5px;background:var(--panel2);box-sizing:border-box;border:2px solid transparent}
+  .mxsq.y{background:var(--accent)}.mxsq.p{background:#e8b873}.mxsq.s{background:var(--line)}
+  .mxsq.need{border-color:var(--txt)}
+  .mxt{font-size:12.5px;color:var(--muted)}
   .cmp-needs{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:16px 18px;margin:0 0 16px}
   .cmp-needs h3{margin:0 0 4px;font-size:16px}
   .cmp-needs p{margin:0 0 10px;color:var(--muted);font-size:13px}
@@ -487,7 +509,7 @@
 <header>
   <div>
     <h1>AI Model Catalog &amp; Deployment Landscape</h1>
-    <div class="sub">Updated November 7, 2026, 09:12 UTC &middot; click a card for hardware &amp; download, or check "Compare" on up to 3 cards</div>
+    <div class="sub">Updated November 7, 2026, 09:15 UTC &middot; click a card for hardware &amp; download, or check "Compare" on up to 3 cards</div>
     
   </div>
   <div class="stats" id="stats"></div>
@@ -876,6 +898,43 @@ function agCompareView(list){
     <p class="ag-sec-sub">How many of the nine channels each agent is stated to offer. This measures reach, not quality.</p>
     <div class="ag-tablewrap" style="padding:16px 18px"><div class="cmp-cov">${cov}</div></div>`;
 }
+let agMxNeed = ['whatsapp','imessage'];
+function agMxToggle(k){ const i=agMxNeed.indexOf(k); i<0?agMxNeed.push(k):agMxNeed.splice(i,1); renderAgents(); }
+const AG_MXORDER = ['whatsapp','imessage','workchat','mobile','desktop','web','voice','email','api'];
+function agMxCell(v){
+  if(v==='Y') return '<svg class="mxi" viewBox="0 0 24 24" role="img" aria-label="Supported"><circle cx="12" cy="12" r="11" fill="var(--accent)"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  if(v==='Y*') return '<svg class="mxi" viewBox="0 0 24 24" role="img" aria-label="Limited or sources disagree"><circle cx="12" cy="12" r="10" fill="rgba(217,150,30,.18)" stroke="#d9961e" stroke-width="2"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#d9961e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  if(v==='S') return '<svg class="mxi" viewBox="0 0 24 24" role="img" aria-label="Coming soon"><circle cx="12" cy="12" r="10" fill="none" stroke="var(--muted)" stroke-width="2" stroke-dasharray="3 3"/></svg>';
+  return '<span class="mxno" aria-label="Not stated">&ndash;</span>';
+}
+function agMatrixView(list){
+  const labels = {}; AG_ROWGROUPS.forEach(g=>g[1].forEach(r=>labels[r[0]]=r[2]));
+  const hit = a=>agMxNeed.filter(k=>agHas(a,k)).length;
+  const full = a=>agMxNeed.filter(k=>a.channels[k]==='Y').length;
+  let cols = list.slice();
+  if(agMxNeed.length) cols.sort((x,y)=>(hit(y)*10+full(y)+agReach(y)/100)-(hit(x)*10+full(x)+agReach(x)/100));
+  const top = cols.length&&agMxNeed.length ? hit(cols[0])*10+full(cols[0]) : -1;
+  const isBest = a=>agMxNeed.length && hit(a)>0 && hit(a)*10+full(a)===top;
+  const chips = AG_MXORDER.map(k=>`<button class="cmp-n ${agMxNeed.indexOf(k)>=0?'on':''}" aria-pressed="${agMxNeed.indexOf(k)>=0}" onclick="agMxToggle('${k}')">${agIcon(k)}${agEsc(labels[k])}</button>`).join('');
+  const bests = cols.filter(isBest).map(a=>a.name);
+  const sum = !agMxNeed.length ? 'Pick the places you live in to find the best match.' : (bests.length ? '<b>Best match for '+agMxNeed.length+' channel'+(agMxNeed.length>1?'s':'')+':</b> '+bests.map(agEsc).join(', ')+'. This counts what pages we read state; it does not rate quality.' : 'No agent in this group is stated to reach any of these channels.');
+  const head = cols.map(a=>`<th class="${isBest(a)?'rec':''}"><div class="hd">${isBest(a)?'<span class="best">Best match</span>':''}<span class="ag-av ${agSegCls(a)}" style="width:34px;height:34px;border-radius:10px;font-size:15px">${agEsc(a.name.charAt(0))}</span>${agRing(a)}<span class="nm">${agEsc(a.name)}</span><span class="vd">${agEsc(a.maker)}</span></div></th>`).join('');
+  const chRows = AG_MXORDER.map(k=>`<tr class="${agMxNeed.indexOf(k)>=0?'mxneed':''}"><td><div class="rl"><span class="ic" style="background:${AG_ICOCOL[k]}">${agIcon(k)}</span><div><b>${agEsc(labels[k])}</b></div></div></td>${cols.map(a=>`<td class="${isBest(a)?'rec':''}">${agMxCell(a.channels[k]||'-')}</td>`).join('')}</tr>`).join('');
+  const lvlRows = [['a2a_self_lvl','One person: own agents'],['a2a_multi_lvl','Different people\'s agents'],['trust_lvl','Trusted-people network']].map(r=>`<tr><td><div class="rl"><b>${r[1]}</b></div></td>${cols.map(a=>`<td class="${isBest(a)?'rec':''}">${agLvlPill(a[r[0]])}</td>`).join('')}</tr>`).join('');
+  const corpRow = `<tr><td><div class="rl"><b>Corporate use</b></div></td>${cols.map(a=>{const lv=(AG_CORP[a.corporate]||0);return `<td class="${isBest(a)?'rec':''}"><span class="lvl lv${lv>=4?3:lv>=2?2:lv==1?1:0}">${agEsc(a.corporate)}</span></td>`;}).join('')}</tr>`;
+  const evRow = `<tr><td><div class="rl"><b>Evidence quality</b></div></td>${cols.map(a=>`<td class="${isBest(a)?'rec':''}"><span class="lvl lv${a.evidence_lvl==3?3:a.evidence_lvl==2?2:1}">${['','Press only','Mixed','Vendor page'][a.evidence_lvl]}</span></td>`).join('')}</tr>`;
+  const n = cols.length+1;
+  const strips = cols.map(a=>`<div class="mxs"><span class="mxn">${agEsc(a.name)}</span><span class="mxq">${AG_MXORDER.map(k=>{const v=a.channels[k]||'-';return '<i class="mxsq '+(v==='Y'?'y':v==='Y*'?'p':v==='S'?'s':'')+(agMxNeed.indexOf(k)>=0?' need':'')+'" title="'+agEsc(labels[k])+'"></i>';}).join('')}</span><span class="mxt">${agReach(a)} of 9${agMxNeed.length?' &middot; '+hit(a)+' of '+agMxNeed.length+' yours':''}</span></div>`).join('');
+  return `<div class="cmp-needs"><h3>Where do you need to reach it?</h3><p>Pick the apps you use. Every agent in the chosen group is scored against them and the best match moves to the left.</p><div class="cmp-nchips">${chips}</div><div class="cmp-sum">${sum}</div></div>
+    <div class="mx-wrap"><table class="mx cmp"><thead><tr><th>Channel</th>${head}</tr></thead><tbody>
+    ${chRows}
+    <tr class="grp"><td colspan="${n}">Working together</td></tr>${lvlRows}
+    <tr class="grp"><td colspan="${n}">Fit for companies</td></tr>${corpRow}${evRow}
+    </tbody></table></div>
+    <div class="ag-legend"><span>${agMxCell('Y')} Supported</span><span>${agMxCell('Y*')} Limited or sources disagree</span><span>${agMxCell('S')} Coming soon</span><span><span class="mxno">&ndash;</span> Not stated (not the same as unsupported)</span></div>
+    <h2 class="ag-sec">Reach at a glance</h2><p class="ag-sec-sub">One square per channel, in the order above. Your chosen channels are outlined.</p>
+    <div class="ag-tablewrap" style="padding:16px 18px">${strips}</div>`;
+}
 function renderAgents(){
   const segs = ['All'].concat(AG_SEGMENTS);
   const list = AGENTS.filter(a=> agFilter==='All' || a.segment===agFilter);
@@ -885,9 +944,10 @@ function renderAgents(){
   const nCorp = AGENTS.filter(a=>a.corporate==='Built for it').length;
   const nOss = AGENTS.filter(a=>a.segment.startsWith('Open')).length;
   const nA2a = AGENTS.filter(a=>a.a2a_self_lvl!=='none'||a.a2a_multi_lvl!=='none').length;
-  const subs = [['cards','Agent cards'],['compare','Compare'],['gaps','Gaps to watch'],['new','What is new']];
+  const subs = [['cards','Agent cards'],['matrix','Channel matrix'],['compare','Compare'],['gaps','Gaps to watch'],['new','What is new']];
   let body = '';
   if(agSub==='cards') body = `<div class="ag-ctl">Sort by <select onchange="setAgSort(this.value)"><option value="reach" ${agSort==='reach'?'selected':''}>Channels reached</option><option value="corp" ${agSort==='corp'?'selected':''}>Corporate fit</option><option value="a2a" ${agSort==='a2a'?'selected':''}>Agent to agent</option><option value="name" ${agSort==='name'?'selected':''}>Name</option></select></div><div class="ag-grid">${agSorted(list).map(agCard).join('')}</div>`;
+  else if(agSub==='matrix') body = agMatrixView(list);
   else if(agSub==='compare') body = agCompareView(list);
   else if(agSub==='gaps') body = `<p class="ag-sec-sub">Questions the public pages do not answer yet. Reviewed every week.</p><div class="ag-gaps">${AG_GAPS.map(g=>`<div class="ag-gap"><h3>${agEsc(g.title)}</h3><p class="q">${agEsc(g.question)}</p><h4>What is known</h4>${agList(g.known)}<h4>Not found</h4>${agList(g.unknown)}</div>`).join('')}</div><h2 class="ag-sec">Also on the watchlist</h2><p class="ag-watch">Named in coverage but not yet verified from a page we could read: ${AG_WATCH.map(agEsc).join(', ')}.</p>`;
   else body = `<p class="ag-sec-sub">Dated feature changes across agents. New entries are added each week.</p><div class="ag-feed">${feed.map(f=>`<div class="ag-feed-row"><span class="d">${agEsc(f.d)}</span><span class="a">${agEsc(f.a)}</span><span>${agEsc(f.t)}</span></div>`).join('')}</div>`;
@@ -897,7 +957,7 @@ function renderAgents(){
     <div class="ag-stats"><div class="ag-stat"><b>${AGENTS.length}</b><span>agents tracked</span></div><div class="ag-stat"><b>${nCorp}</b><span>built for corporate use</span></div><div class="ag-stat"><b>${nA2a}</b><span>with agent-to-agent features</span></div><div class="ag-stat"><b>${nOss}</b><span>open source</span></div></div>
     <div class="ag-note"><b>How to read this.</b> Compiled by AI from public pages and press, not hands-on testing. Vendor claims are marked; where a vendor page could not be read the card says so. Bars show what the sources state, not product quality. Prices and features change often; check the source links.</div>
     <div class="ag-subtabs">${subs.map(x=>`<button class="ag-st ${x[0]===agSub?'on':''}" onclick="setAgSub('${x[0]}')">${x[1]}</button>`).join('')}</div>
-    ${(agSub==='cards'||agSub==='compare') ? `<div class="ag-chips">${segs.map(s=>`<button class="ag-chip ${s===agFilter?'on':''}" onclick="setAgFilter('${s}')">${s} (${s==='All'?AGENTS.length:AGENTS.filter(a=>a.segment===s).length})</button>`).join('')}</div>` : ''}
+    ${(agSub==='cards'||agSub==='compare'||agSub==='matrix') ? `<div class="ag-chips">${segs.map(s=>`<button class="ag-chip ${s===agFilter?'on':''}" onclick="setAgFilter('${s}')">${s} (${s==='All'?AGENTS.length:AGENTS.filter(a=>a.segment===s).length})</button>`).join('')}</div>` : ''}
     ${body}`;
 }
 const BLOGS = [{"id": "secops-executive", "audience": "Executive", "topic": "Security operations models and gaps", "title": "Is there an AI built for your security team's job? Mostly not yet", "summary": "We looked for trained AI models in eight security functions. Two have usable open options. Most of what vendors sell is a product or a general model.", "blocks": [["p", "Security vendors describe a lot of their software as AI. We asked a narrower question: for each security function, is there an AI model that has actually been trained for that job, can be obtained, and has published results? The answer is yes for two functions and no for most of the rest."], ["h", "Where the answer is yes"], ["p", "Network traffic monitoring has one strong open model, netFound from the University of California, Santa Barbara. It learns from the shape of network traffic rather than from text, and its authors report very high accuracy in detecting intrusions on a public test set. A public test set is not your network, so a pilot on your own traffic comes first."], ["p", "Vulnerability triage has two. The Computer Incident Response Center Luxembourg (CIRCL) publishes small models that predict how severe a newly reported flaw is and which attacker techniques it enables, and runs them in its own public service. Their honest accuracy is modest: about 74% on severity, once an earlier flattering figure was corrected by the authors themselves. They are good at speeding up the first sort, and an analyst still decides."], ["h", "Where the answer is not yet"], ["p", "We found no released, measured model for endpoint detection and response, insider-threat detection, firewall rule review or identity and access policy review. Research papers describe promising designs for insider threats and for limiting excess permissions, but none has released a model we could verify. Cloud configuration is partly covered: one research model writes and edits infrastructure code, though we found no public weights and it is not built to audit existing settings. The label CTEM, continuous threat exposure management, describes a product category, and we found no trained model behind it."], ["h", "What this means for planning"], ["p", "In the functions with no model built for the job, teams today either buy a vendor product or ask a general AI assistant to read their logs and settings. Both can work, and neither comes with independent accuracy figures. When a vendor says a product is powered by AI, ask which model, who tested it and on what data. The same weekly review that produces this catalog will flag a new trained model as soon as one appears."], ["p", "A limit on this work: for the research papers we read the abstracts and, where they exist, the model pages, not every paper in full, and every accuracy figure above is published by the authors. The references below link each source."]], "refs": [["netFound, arXiv 2310.17025", "https://arxiv.org/abs/2310.17025"], ["VLAI severity classifier model card, including the corrected accuracy note (CIRCL)", "https://huggingface.co/CIRCL/vulnerability-severity-classification-roberta-base"], ["TerraFormer, arXiv 2601.08734", "https://arxiv.org/abs/2601.08734"], ["DMFI insider threat framework, arXiv 2508.05694", "https://arxiv.org/abs/2508.05694"], ["ALPS least-privilege enforcement, arXiv 2603.25393", "https://arxiv.org/abs/2603.25393"]]}];
