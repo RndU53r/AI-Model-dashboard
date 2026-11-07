@@ -163,8 +163,6 @@
     .cmp-actions{justify-content:space-between}
   }
 
-  .blog-mobile{display:none;margin-top:8px;background:transparent;border:1px solid var(--line);color:var(--accent,#3b82f6);border-radius:999px;padding:5px 14px;font-size:12px;cursor:pointer}
-  .blog-sheet{max-width:880px}
   .blog-chips{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 14px}
   .blog-chip{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:5px 12px;font-size:12px;cursor:pointer}
   .blog-chip.on{background:var(--accent,#3b82f6);border-color:var(--accent,#3b82f6);color:#fff}
@@ -185,7 +183,130 @@
   .blog-refs a{color:var(--accent,#3b82f6)}
   .blog-note{font-size:12px;color:var(--muted);margin-top:14px}
   .blog-disclaimer{font-size:12px;line-height:1.55;color:var(--muted);border:1px solid var(--line);border-left:3px solid #fcd34d;border-radius:8px;padding:9px 12px;margin:10px 0 14px}
-  @media (max-width:1024px){.blog-mobile{display:inline-block}}
+
+  .viewtabs{display:flex;gap:4px;padding:10px 24px 0;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg,#0b1220);z-index:20}
+  .viewtab{background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);font-size:14px;font-weight:600;padding:10px 16px;cursor:pointer}
+  .viewtab:hover{color:var(--txt)}
+  .viewtab.on{color:var(--accent);border-bottom-color:var(--accent)}
+  .pgview{display:none;padding:0 0 100px}
+  .pgview .bv-inner{max-width:820px;margin:0 auto;padding:28px 24px 0}
+  .pgview h1{font-size:34px;letter-spacing:-.5px;margin:18px 0 8px}
+  .pgview .pg-sub{color:var(--muted,#9fb0cc);margin:0 0 22px;line-height:1.55}
+  .pgview .field{padding:14px 0;border-bottom:1px solid var(--line,rgba(140,160,200,.2))}
+  .pgview .field .k{font-weight:700;margin-bottom:4px}
+  .pgview .field .v{line-height:1.6}
+  #blogsView{display:none;padding:28px 24px 80px}
+  #blogsView .bv-inner{max-width:780px;margin:0 auto}
+  #blogsView h1.bv-h{font-size:26px;margin:0 0 6px}
+  .bv-sub{color:var(--muted);font-size:14px;line-height:1.6;margin:0 0 6px}
+  .bv-article h1{font-size:28px;line-height:1.25;margin:10px 0 6px}
+  .bv-article h3{font-size:17px;margin:26px 0 4px}
+  .bv-article p{font-size:15.5px;line-height:1.75;margin:10px 0}
+  @media (max-width:1024px){.viewtabs{padding:8px 12px 0}#blogsView{padding:20px 14px 90px}.bv-article h1{font-size:23px}}
+
+  /* ===== v3: themes ===== */
+  :root[data-theme="light"]{--bg:#f8f5f0;--panel:#ffffff;--panel2:#f1ede5;--line:#ddd5c6;--txt:#1d3a2c;--muted:#66756b;
+    --accent:#2f5fd0;--prop:#c43d3d;--ow:#b9650f;--oss:#2c8a55;--edge:#2c8a55;--dc:#b9650f;--cloud:#6f45c9;color-scheme:light}
+  :root[data-theme="light"] .vtable td{color:#26402f}
+  :root[data-theme="light"] .vtable tr.row-dep td{color:#8c968f}
+  :root[data-theme="light"] .card{box-shadow:0 1px 2px rgba(29,58,44,.06)}
+  :root[data-theme="light"] .modal{background:rgba(29,58,44,.38)}
+  :root[data-theme="light"] .sheet{box-shadow:0 20px 60px rgba(29,58,44,.18)}
+  :root[data-theme="light"] header{background:linear-gradient(180deg,#fffdf9,#f8f5f0)}
+  :root[data-theme="light"] .blog-chip.on{color:#fff}
+  :root[data-theme="light"] .blog-tag.tech{color:#1e6a8c;border-color:#9cc8da}
+  :root[data-theme="light"] .blog-tag.exec{color:#8a6410;border-color:#e0c37b}
+  /* ===== v3: top navigation ===== */
+  .sidebar{display:none !important}
+  .appshell{display:block}
+  .topnav{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:6px;padding:0 28px;height:68px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .tn-brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.3px;margin-right:26px;cursor:pointer;color:var(--txt)}
+  .tn-mark{width:34px;height:34px;border-radius:11px;background:var(--txt);color:var(--bg);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800}
+  .topnav .tn{background:none;border:0;color:var(--txt);font-size:15px;font-weight:500;padding:10px 14px;border-radius:999px;cursor:pointer;opacity:.78}
+  .topnav .tn:hover{opacity:1;background:color-mix(in srgb,var(--txt) 7%,transparent)}
+  .topnav .tn.on{opacity:1;font-weight:700;background:color-mix(in srgb,var(--txt) 9%,transparent)}
+  .tn-spacer{flex:1}
+  .tn-icon{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--txt);cursor:pointer;display:flex;align-items:center;justify-content:center;margin-right:8px}
+  .tn-icon:hover{background:color-mix(in srgb,var(--txt) 8%,transparent)}
+  .tn-cta{background:#d3e0ff;color:#1d3a2c;border:0;border-radius:999px;padding:13px 24px;font-size:15px;font-weight:700;cursor:pointer}
+  :root:not([data-theme="light"]) .tn-cta{background:#2a3b66;color:#e7ecf5}
+  .tn-cta:hover{filter:brightness(.97)}
+  @media (max-width:900px){.topnav{padding:0 12px;height:auto;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}.tn-brand{margin-right:8px;font-size:16px}.topnav .tn{padding:8px 10px;font-size:14px}.tn-cta{display:none}.tn-spacer{display:none}}
+  /* ===== v3: blog (editorial) ===== */
+  #blogsView{padding:0 0 100px}
+  #blogsView .bv-inner{max-width:1040px;margin:0 auto;padding:0 24px}
+  .bv-hero{padding:56px 0 30px;text-align:left}
+  .bv-kicker{font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent)}
+  .bv-hero h1.bv-h{font-size:clamp(34px,5vw,56px);line-height:1.08;letter-spacing:-1.2px;margin:10px 0 12px;font-weight:800}
+  .bv-sub{font-size:18px;line-height:1.6;max-width:640px;color:var(--muted)}
+  .bv-feature{display:grid;grid-template-columns:1.25fr 1fr;gap:0;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--panel);cursor:pointer;margin:26px 0 22px;transition:.18s}
+  .bv-feature:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(0,0,0,.18)}
+  .bv-art{min-height:300px;background:linear-gradient(135deg,#1d3a2c,#2f5fd0 70%,#d3e0ff);position:relative;display:flex;align-items:flex-end;padding:26px}
+  .bv-art span{font-family:Georgia,'Iowan Old Style',serif;font-size:64px;line-height:1;color:rgba(255,255,255,.92);font-weight:700}
+  .bv-art.exec{background:linear-gradient(135deg,#6b4a0f,#e0a93a 70%,#fff1c9)}
+  .bv-fbody{padding:34px 34px 30px;display:flex;flex-direction:column;justify-content:center}
+  .bv-fbody h2{font-family:Georgia,'Iowan Old Style',serif;font-size:31px;line-height:1.2;margin:12px 0 12px;letter-spacing:-.4px}
+  .bv-fbody p{color:var(--muted);font-size:16px;line-height:1.65;margin:0 0 18px}
+  .bv-meta{font-size:13px;color:var(--muted);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .bv-readbtn{align-self:flex-start;background:var(--txt);color:var(--bg);border:0;border-radius:999px;padding:12px 22px;font-weight:700;cursor:pointer;margin-top:6px}
+  .bv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+  .bv-card{border:1px solid var(--line);border-radius:18px;background:var(--panel);padding:22px;cursor:pointer;transition:.18s}
+  .bv-card:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.14)}
+  .bv-card h3{font-family:Georgia,'Iowan Old Style',serif;font-size:21px;line-height:1.25;margin:10px 0 8px}
+  .bv-card p{color:var(--muted);font-size:14.5px;line-height:1.6;margin:0 0 12px}
+  .bv-article{max-width:700px;margin:0 auto;padding-top:34px}
+  .bv-article h1{font-family:Georgia,'Iowan Old Style',serif;font-size:clamp(30px,4.6vw,46px);line-height:1.12;letter-spacing:-.8px;margin:14px 0 14px}
+  .bv-lede{font-family:Georgia,'Iowan Old Style',serif;font-size:21px;line-height:1.55;color:var(--muted);margin:0 0 20px}
+  .bv-article h3{font-size:22px;line-height:1.3;margin:38px 0 6px;letter-spacing:-.3px}
+  .bv-article p{font-family:Georgia,'Iowan Old Style',serif;font-size:19px;line-height:1.82;margin:16px 0}
+  .bv-byline{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted);padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:6px 0 10px}
+  .bv-avatar{width:36px;height:36px;border-radius:50%;background:var(--txt);color:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
+  .blog-refs{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+  .blog-refs li{font-size:13px}
+  .blog-back{font-size:14px;font-weight:600;margin-top:22px}
+  #readbar{position:fixed;left:0;top:0;height:3px;width:0;background:var(--accent);z-index:60;display:none}
+  /* ===== v3: model profile card ===== */
+  .sheet.profile{max-width:860px;padding:0;overflow:hidden}
+  .pf-head{padding:26px 28px 18px;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 16%,var(--panel)),var(--panel))}
+  .pf-top{display:flex;gap:16px;align-items:center}
+  .pf-avatar{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;color:#fff;flex-shrink:0}
+  .pf-name{font-size:24px;font-weight:800;margin:0;letter-spacing:-.4px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .pf-org{color:var(--muted);font-size:13.5px;margin-top:3px}
+  .pf-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:18px}
+  .pf-stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:11px 13px}
+  .pf-stat .l{font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
+  .pf-stat .v{font-size:15px;font-weight:700;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .pf-tabs{display:flex;gap:4px;padding:0 20px;border-bottom:1px solid var(--line);background:var(--panel);overflow:auto}
+  .pf-tab{background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);font-weight:600;font-size:14px;padding:13px 14px;cursor:pointer;white-space:nowrap}
+  .pf-tab.on{color:var(--txt);border-bottom-color:var(--accent)}
+  .pf-pane{display:none;padding:20px 28px 28px}
+  .pf-pane.on{display:block}
+  .sheet.profile .close{z-index:3;top:16px;right:18px}
+  /* ===== v3: comparison bars ===== */
+  .cmpbars{margin:14px 0 4px;border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:16px 18px}
+  .cmpbars h4{margin:0 0 2px;font-size:15px}
+  .cmpbars .cb-note{font-size:12px;color:var(--muted);margin:0 0 12px}
+  .cb-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;margin-bottom:10px}
+  .cb-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+  .cb-row{margin:12px 0}
+  .cb-label{font-size:12px;font-weight:700;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+  .cb-line{display:grid;grid-template-columns:130px 1fr 96px;gap:10px;align-items:center;margin:4px 0;font-size:12.5px}
+  .cb-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .cb-track{height:10px;border-radius:99px;background:var(--panel2);overflow:hidden}
+  .cb-fill{height:100%;border-radius:99px}
+  .cb-val{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+  @media (max-width:700px){.bv-feature{grid-template-columns:1fr}.bv-art{min-height:140px}.cb-line{grid-template-columns:90px 1fr 70px}.pf-pane{padding:16px}}
+
+  /* v4-fixes */
+  :root[data-theme="light"] .catgroup,:root[data-theme="light"] .lv-name{color:#1d3a2c}
+  :root[data-theme="light"] .card p{color:#3d5246}
+  :root[data-theme="light"] .hw{color:#5b6c61}
+  :root[data-theme="light"] .usecase.access{color:#8a6410;background:rgba(224,169,58,.14);border-left-color:#c9962b}
+  :root[data-theme="light"] .card .newtag{color:#fff}
+  .pf-stat .v{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;font-size:13.5px;line-height:1.3}
+  .bv-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:2px}
+  .bv-tags .blog-tag{margin-right:0}
+  .bv-art span{font-size:44px;letter-spacing:-1px}
 </style>
 </head>
 <body>
@@ -203,11 +324,23 @@
   <button id="navGithub" title="View source on GitHub (opens in new tab)" onclick="window.open('https://github.com/RndU53r/AI-Model-dashboard','_blank')"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></button>
 </aside>
 <div class="main">
+<div id="readbar"></div>
+<nav class="topnav" id="topnav">
+  <div class="tn-brand" onclick="setView('catalog')"><span class="tn-mark">AI</span>Model Catalog</div>
+  <button class="tn on" data-nav="navCatalog" onclick="setView('catalog')">Catalog</button>
+  <button class="tn" data-nav="navBlogs" onclick="setView('blogs')">Blogs</button>
+  <button class="tn" data-nav="navAbout" onclick="openAbout()">About</button>
+  <button class="tn" data-nav="navGlossary" onclick="openGlossary()">Glossary</button>
+  <span class="tn-spacer"></span>
+  <button class="tn-icon" id="themeBtn" title="Switch light / dark theme" onclick="toggleTheme()"><svg id="themeIco" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg></button>
+  <button class="tn-cta" onclick="window.open('https://github.com/RndU53r/AI-Model-dashboard','_blank')">View on GitHub</button>
+</nav>
+<div id="catalogView">
 <header>
   <div>
     <h1>AI Model Catalog &amp; Deployment Landscape</h1>
-    <div class="sub">Updated November 7, 2026, 06:43 UTC &middot; click a card for hardware &amp; download, or check "Compare" on up to 3 cards</div>
-    <button class="blog-mobile" onclick="openBlogs()">Blogs: models and gaps</button>
+    <div class="sub">Updated November 7, 2026, 07:03 UTC &middot; click a card for hardware &amp; download, or check "Compare" on up to 3 cards</div>
+    
   </div>
   <div class="stats" id="stats"></div>
 </header>
@@ -227,6 +360,10 @@
   <div class="legend">Type: <span class="pill t-proprietary">proprietary</span> <span class="pill t-openweight">open-weight</span> <span class="pill t-fullyopensource">fully open-source</span> &nbsp;·&nbsp; Tier: <span class="tier edge">on-device</span> <span class="tier dc">data center</span> <span class="tier cloud">cloud</span></div>
   <div id="results"></div>
 </div>
+</div>
+<div id="blogsView"><div class="bv-inner" id="blogsPage"></div></div>
+<div class="pgview" id="aboutView"><div class="bv-inner" id="aboutPage"></div></div>
+<div class="pgview" id="glossaryView"><div class="bv-inner" id="glossaryPage"></div></div>
 <div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
 <div class="modal" id="cmpModal"><div class="sheet cmp-sheet" id="cmpSheet"></div></div>
 <div class="cmp-tray" id="cmpTray">
@@ -242,9 +379,7 @@
   Capability summaries are neutral descriptions, not benchmark scores. <b>Selection notes</b> are analysis, not official positions. Sovereign-AI is one optional filter, not the primary axis.
   <br>This project is licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
 </footer>
-<div class="modal" id="aboutModal"><div class="sheet" id="aboutSheet"></div></div>
-<div class="modal" id="glossaryModal"><div class="sheet" id="glossarySheet"></div></div>
-<div class="modal" id="blogsModal"><div class="sheet blog-sheet" id="blogsSheet"></div></div>
+
 </div>
 </div>
 <script>
@@ -309,11 +444,11 @@ function flashEl(node){
   node.classList.remove('flash'); void node.offsetWidth; node.classList.add('flash');
 }
 function setActiveNav(id){
+  document.querySelectorAll('.topnav .tn').forEach(b=>b.classList.toggle('on', b.dataset.nav===id));
   ['navCatalog','navCompare','navLegend','navAbout','navGlossary','navBlogs'].forEach(n=>el(n).classList.toggle('active', n===id));
 }
 function goCatalog(){
-  setActiveNav('navCatalog');
-  window.scrollTo({top:0,behavior:'smooth'});
+  setView('catalog');
 }
 function goCompare(){
   setActiveNav('navCompare');
@@ -326,21 +461,20 @@ function goLegend(){
   node.scrollIntoView({behavior:'smooth', block:'center'});
   flashEl(node);
 }
-function openAbout(){
-  setActiveNav('navAbout');
-  el('aboutSheet').innerHTML = `<span class="close" onclick="closeAbout()">&times;</span>
-    <h2>About this catalog</h2>
+function renderAbout(){
+  el('aboutPage').innerHTML = `<h1>About this catalog</h1>
+    <p class="pg-sub">How the catalog is built and what its numbers mean.</p>
     <div class="field"><div class="k">Research date</div><div class="v">2026-11-07 &middot; 252 model families across 12 categories</div></div>
     <div class="field"><div class="k">Sources</div><div class="v">Vendor/lab docs, model cards &amp; public reporting.</div></div>
-    <div class="field"><div class="k">Hardware estimates</div><div class="v">Heuristic, from parameter count (4-bit for on-device, fp16 for data-center) — verify before provisioning.</div></div>
+    <div class="field"><div class="k">Hardware estimates</div><div class="v">Heuristic, from parameter count (4-bit for on-device, fp16 for data-center). Verify before provisioning.</div></div>
     <div class="field"><div class="k">Capability summaries</div><div class="v">Neutral descriptions, not benchmark scores. Selection notes are analysis, not official positions.</div></div>
     <div class="field"><div class="k">Sovereign-AI</div><div class="v">One optional filter, not the primary axis.</div></div>
-    <div class="field"><div class="k">License</div><div class="v">Creative Commons Attribution-ShareAlike 4.0 International — <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">details</a>.</div></div>`;
-  el('aboutModal').classList.add('open');
+    <div class="field"><div class="k">License</div><div class="v">Creative Commons Attribution-ShareAlike 4.0 International. <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">Details</a>.</div></div>`;
 }
-function closeAbout(){ el('aboutModal').classList.remove('open'); }
-el('aboutModal').addEventListener('click',e=>{if(e.target.id==='aboutModal')closeAbout();});
-el('glossaryModal').addEventListener('click',e=>{if(e.target.id==='glossaryModal')closeGlossary();});
+function openAbout(){ setView('about'); }
+function closeAbout(){}
+function closeGlossary(){}
+function openGlossary(){ setView('glossary'); }
 
 function tierTags(d){
   return d._tiers.map(t=>{const cl=t.startsWith('On-device')?'edge':t.startsWith('Data')?'dc':'cloud';return `<span class="tier ${cl}">${t.replace('On-device: ','')}</span>`;}).join('');
@@ -412,52 +546,96 @@ function linkify(text){
   out += str.slice(cursor);
   return out;
 }
-function openGlossary(){
-  setActiveNav('navGlossary');
+function renderGlossary(){
   const rows = GLOSSARY
     .filter((g,i,arr)=>arr.findIndex(x=>x[0].toLowerCase()===g[0].toLowerCase())===i)
     .sort((a,b)=>a[0].localeCompare(b[0]));
-  el('glossarySheet').innerHTML = `<span class="close" onclick="closeGlossary()">&times;</span>
-    <h2>Glossary — plain-language definitions</h2>
-    <div class="field"><div class="v">Technical terms in this catalog are underlined; click or tap one to jump here. Full list below.</div></div>
+  el('glossaryPage').innerHTML = `<h1>Glossary</h1>
+    <p class="pg-sub">Plain-language definitions. Technical terms in the catalog are underlined; click or tap one to come here.</p>
     ${rows.map(([t,d])=>`<div class="field"><div class="k">${t}</div><div class="v">${d}</div></div>`).join('')}`;
-  el('glossaryModal').classList.add('open');
 }
-function closeGlossary(){ el('glossaryModal').classList.remove('open'); }
 const BLOGS = [{"id": "secops-executive", "audience": "Executive", "topic": "Security operations models and gaps", "title": "Is there an AI built for your security team's job? Mostly not yet", "summary": "We looked for trained AI models in eight security functions. Two have usable open options. Most of what vendors sell is a product or a general model.", "blocks": [["p", "Security vendors describe a lot of their software as AI. We asked a narrower question: for each security function, is there an AI model that has actually been trained for that job, can be obtained, and has published results? The answer is yes for two functions and no for most of the rest."], ["h", "Where the answer is yes"], ["p", "Network traffic monitoring has one strong open model, netFound from the University of California, Santa Barbara. It learns from the shape of network traffic rather than from text, and its authors report very high accuracy in detecting intrusions on a public test set. A public test set is not your network, so a pilot on your own traffic comes first."], ["p", "Vulnerability triage has two. The Computer Incident Response Center Luxembourg (CIRCL) publishes small models that predict how severe a newly reported flaw is and which attacker techniques it enables, and runs them in its own public service. Their honest accuracy is modest: about 74% on severity, once an earlier flattering figure was corrected by the authors themselves. They are good at speeding up the first sort, and an analyst still decides."], ["h", "Where the answer is not yet"], ["p", "We found no released, measured model for endpoint detection and response, insider-threat detection, firewall rule review or identity and access policy review. Research papers describe promising designs for insider threats and for limiting excess permissions, but none has released a model we could verify. Cloud configuration is partly covered: one research model writes and edits infrastructure code, though we found no public weights and it is not built to audit existing settings. The label CTEM, continuous threat exposure management, describes a product category, and we found no trained model behind it."], ["h", "What this means for planning"], ["p", "In the functions with no model built for the job, teams today either buy a vendor product or ask a general AI assistant to read their logs and settings. Both can work, and neither comes with independent accuracy figures. When a vendor says a product is powered by AI, ask which model, who tested it and on what data. The same weekly review that produces this catalog will flag a new trained model as soon as one appears."], ["p", "A limit on this work: for the research papers we read the abstracts and, where they exist, the model pages, not every paper in full, and every accuracy figure above is published by the authors. The references below link each source."]], "refs": [["netFound, arXiv 2310.17025", "https://arxiv.org/abs/2310.17025"], ["VLAI severity classifier model card, including the corrected accuracy note (CIRCL)", "https://huggingface.co/CIRCL/vulnerability-severity-classification-roberta-base"], ["TerraFormer, arXiv 2601.08734", "https://arxiv.org/abs/2601.08734"], ["DMFI insider threat framework, arXiv 2508.05694", "https://arxiv.org/abs/2508.05694"], ["ALPS least-privilege enforcement, arXiv 2603.25393", "https://arxiv.org/abs/2603.25393"]]}];
 const BLOG_DISCLAIMER = `<div class="blog-disclaimer"><b>Disclaimer.</b> These posts are written by AI and are not reviewed by a person on a continuous basis. They may contain errors or become outdated. Check the cited sources before relying on them.</div>`;
 let blogFilter = 'All';
 function escB(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function openBlogs(){ setActiveNav('navBlogs'); renderBlogList(); el('blogsModal').classList.add('open'); }
-function closeBlogs(){ el('blogsModal').classList.remove('open'); setActiveNav('navCatalog'); }
-function setBlogFilter(f){ blogFilter=f; renderBlogList(); }
-function renderBlogList(){
-  const posts = BLOGS.filter(b=>blogFilter==='All'||b.audience===blogFilter);
-  const chip = f=>`<button class="blog-chip ${blogFilter===f?'on':''}" onclick="setBlogFilter('${f}')">${f}</button>`;
-  el('blogsSheet').innerHTML = `<span class="close" onclick="closeBlogs()">&times;</span>
-    <h2>Blogs: models and gaps</h2>
-    ${BLOG_DISCLAIMER}
-    <div class="blog-note">One new post each week, written for either engineers (technical) or leadership (executive). Every post cites its sources. Figures reported only by a model's publisher are labelled as such.</div>
-    ${new Set(BLOGS.map(b=>b.audience)).size>1?`<div class="blog-chips">${chip('All')}${chip('Technical')}${chip('Executive')}</div>`:''}
-    ${posts.map(b=>`<div class="blog-card" onclick="openBlogPost('${b.id}')">
-      <span class="blog-tag ${b.audience==='Technical'?'tech':'exec'}">${escB(b.audience)}</span><span class="blog-tag">${escB(b.topic)}</span>
-      <h3>${escB(b.title)}</h3><p>${escB(b.summary)}</p></div>`).join('')}`;
-  el('blogsSheet').scrollTop = 0;
+function setView(v, id){
+  const blogs = v==='blogs', about = v==='about', gl = v==='glossary';
+  el('catalogView').style.display = (blogs||about||gl) ? 'none' : '';
+  el('blogsView').style.display = blogs ? 'block' : 'none';
+  el('aboutView').style.display = about ? 'block' : 'none';
+  el('glossaryView').style.display = gl ? 'block' : 'none';
+  readBar(blogs && !!id);
+  setActiveNav(blogs ? 'navBlogs' : about ? 'navAbout' : gl ? 'navGlossary' : 'navCatalog');
+  const tray = el('cmpTray'); if(tray) tray.style.visibility = (blogs||about||gl) ? 'hidden' : '';
+  if(blogs){ id ? renderBlogPost(id) : renderBlogList(); }
+  if(about) renderAbout();
+  if(gl) renderGlossary();
+  const want = blogs ? (id ? '#blog/'+id : '#blogs') : about ? '#about' : gl ? '#glossary' : '';
+  if((location.hash||'') !== want){ history.pushState(null,'', want || location.pathname + location.search); }
+  window.scrollTo({top:0});
 }
-function openBlogPost(id){
-  const b = BLOGS.find(x=>x.id===id); if(!b) return;
+function openBlogs(){ setView('blogs'); }
+function closeBlogs(){}
+function openBlogPost(id){ setView('blogs', id); }
+function setBlogFilter(f){ blogFilter=f; renderBlogList(); }
+function readMins(b){ const w=b.blocks.map(x=>x[1]).join(' ').split(/\s+/).length; return Math.max(2, Math.round(w/210)); }
+function blogMeta(b){ return `<span>${escB(BLOGS_DATE_TXT)}</span><span>&middot;</span><span>${readMins(b)} min read</span>`; }
+function renderBlogList(){
+  const posts = BLOGS.slice().reverse();
+  const first = posts[0], rest = posts.slice(1);
+  const tagHTML = b=>`<div class="bv-tags"><span class="blog-tag ${b.audience==='Technical'?'tech':'exec'}">${escB(b.audience)}</span><span class="blog-tag">${escB(b.topic)}</span></div>`;
+  el('blogsPage').innerHTML = `<div class="bv-hero"><div class="bv-kicker">Models and gaps</div>
+      <h1 class="bv-h">What the model landscape does and does not cover</h1>
+      <p class="bv-sub">One new post each week, written for either engineers or leadership. Every post cites its sources.</p></div>
+    ${BLOG_DISCLAIMER}
+    ${first?`<div class="bv-feature" onclick="openBlogPost('${first.id}')">
+      <div class="bv-art ${first.audience==='Technical'?'':'exec'}"><span>${escB(first.audience)}<br>briefing</span></div>
+      <div class="bv-fbody">${tagHTML(first)}<h2>${escB(first.title)}</h2><p>${escB(first.summary)}</p>
+        <div class="bv-meta">${blogMeta(first)}</div><button class="bv-readbtn">Read the post</button></div></div>`:''}
+    ${rest.length?`<div class="bv-grid">${rest.map(b=>`<div class="bv-card" onclick="openBlogPost('${b.id}')">${tagHTML(b)}<h3>${escB(b.title)}</h3><p>${escB(b.summary)}</p><div class="bv-meta">${blogMeta(b)}</div></div>`).join('')}</div>`:''}`;
+}
+function renderBlogPost(id){
+  const b = BLOGS.find(x=>x.id===id); if(!b){ renderBlogList(); return; }
   const body = b.blocks.map(([t,x])=> t==='h' ? `<h3>${escB(x)}</h3>` : `<p>${escB(x)}</p>`).join('');
   const refs = b.refs.map(([l,u])=>`<li>${escB(l)}. <a href="${escB(u)}" target="_blank" rel="noopener noreferrer">${escB(u)}</a></li>`).join('');
-  el('blogsSheet').innerHTML = `<span class="close" onclick="closeBlogs()">&times;</span>
-    <button class="blog-back" onclick="renderBlogList()">&larr; All blogs</button>
-    <div class="blog-body"><span class="blog-tag ${b.audience==='Technical'?'tech':'exec'}">${escB(b.audience)}</span><span class="blog-tag">${escB(b.topic)}</span>
-    ${BLOG_DISCLAIMER}<h2>${escB(b.title)}</h2>${body}
+  el('blogsPage').innerHTML = `<button class="blog-back" onclick="setView('blogs')">&larr; All posts</button>
+    <article class="bv-article"><div class="bv-tags">${`<span class="blog-tag ${b.audience==='Technical'?'tech':'exec'}">${escB(b.audience)}</span><span class="blog-tag">${escB(b.topic)}</span>`}</div>
+    <h1>${escB(b.title)}</h1><p class="bv-lede">${escB(b.summary)}</p>
+    <div class="bv-byline"><span class="bv-avatar">AI</span><span class="bv-meta">Written by AI <span>&middot;</span> ${blogMeta(b)}</span></div>
+    ${BLOG_DISCLAIMER}${body}
     <div class="blog-refs"><b>References</b><ol>${refs}</ol></div>
     ${BLOG_DISCLAIMER}
-    <div class="blog-note">Written 2026-11-07 from the catalog's research date. Catalog entries and their sources are in the Catalog tab.</div></div>`;
-  el('blogsModal').scrollTop = 0; el('blogsSheet').scrollTop = 0;
+    <div class="blog-note">Written ${escB(BLOGS_DATE_TXT)} from the catalog's research date. Catalog entries and their sources are in the Catalog tab.</div></article>`;
 }
-el('blogsModal').addEventListener('click',e=>{if(e.target.id==='blogsModal')closeBlogs();});
+function readBar(on){ const r=el('readbar'); r.style.display = on?'block':'none'; r.style.width='0'; }
+window.addEventListener('scroll',()=>{ const r=el('readbar'); if(r.style.display!=='block')return; const d=document.documentElement; const m=d.scrollHeight-innerHeight; r.style.width = (m>0? (scrollY/m*100):0)+'%'; });
+const BLOGS_DATE_TXT = (function(d){const m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];const p=d.split('-');return p.length===3?(+p[2])+' '+m[+p[1]-1]+' '+p[0]:d;})('2026-11-07');
+
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  const moon='<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>';
+  const sun='<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>';
+  const ico = el('themeIco'); if(ico) ico.innerHTML = (t==='light') ? moon : sun;
+}
+function toggleTheme(){
+  const t = document.documentElement.getAttribute('data-theme')==='light' ? 'dark' : 'light';
+  applyTheme(t); try{ localStorage.setItem('aimc-theme', t); }catch(e){}
+}
+(function initTheme(){
+  let t = null; try{ t = localStorage.getItem('aimc-theme'); }catch(e){}
+  if(!t){ t = (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark'; }
+  applyTheme(t);
+})();
+function routeFromHash(){
+  const h = location.hash || '';
+  if(h.startsWith('#blog/')) setView('blogs', decodeURIComponent(h.slice(6)));
+  else if(h==='#blogs') setView('blogs');
+  else if(h==='#about') setView('about');
+  else if(h==='#glossary') setView('glossary');
+  else setView('catalog');
+}
+window.addEventListener('popstate', routeFromHash);
+if(/^#(blog|about|glossary)/.test(location.hash)) routeFromHash();
 
 
 const FIELDS=[['category','Category'],['derived_from','Derived from (base model)'],['source_links','Sources (this week\'s research)'],['license','License'],
@@ -542,8 +720,44 @@ function openModal(d){
   h+=`<div class="field"><div class="k">Sovereign-AI relevance (filter)</div><div class="v">${d.sovereign_ai_countries} — ${linkify(d.sovereign_ai_usage_description)}</div></div>`;
   h+=`<div class="note"><div class="k">SELECTION & SOVEREIGNTY NOTE (analysis, not an official position)</div><div class="v">${linkify(d.sovereign_selection_hypothesis.replace(/^Hypothesis:\s*/,''))}</div></div>`;
   el('sheet').innerHTML=h; el('modal').classList.add('open');
+  profileize(d);
 }
-function closeModal(){el('modal').classList.remove('open');}
+
+function hueOf(s){ let n=0; for(const c of String(s)) n=(n*31+c.charCodeAt(0))%360; return n; }
+function short(s,n){ s=String(s||'unknown'); return s.length>n ? s.slice(0,n-1)+'…' : s; }
+function profileize(d){
+  const sheet = el('sheet'); const kids=[...sheet.children];
+  const close = kids.find(k=>k.classList.contains('close'));
+  const h2 = kids.find(k=>k.tagName==='H2'); const org = kids.find(k=>k.classList.contains('org'));
+  const pill = h2 ? h2.querySelector('.pill') : null;
+  const panes = {over:[],vars:[],hw:[],spec:[]};
+  kids.forEach(k=>{
+    if(k===close||k===h2||k===org) return;
+    const key = (k.querySelector('.k')||{}).textContent||'';
+    if(k.classList.contains('fambox')) panes.vars.push(k);
+    else if(k.classList.contains('hwbox')) panes.hw.push(k);
+    else if(k.classList.contains('note')) panes.over.push(k);
+    else if(/^Capability summary|^Specialized for|^Also applicable|^Sovereign-AI relevance/i.test(key)) panes.over.push(k);
+    else panes.spec.push(k);
+  });
+  const stat=(l,v)=>`<div class="pf-stat" title="${escB(v)}"><div class="l">${l}</div><div class="v">${escB(short(v,26))}</div></div>`;
+  const hue=hueOf(d.origin_org);
+  const head = `<div class="pf-head"><div class="pf-top"><div class="pf-avatar" style="background:hsl(${hue},48%,42%)">${escB((d.origin_org||'?').trim().charAt(0).toUpperCase())}</div>
+    <div><h2 class="pf-name">${escB(d.model_family)} ${pill?pill.outerHTML:''}</h2><div class="pf-org">${org?org.innerHTML:''}</div></div></div>
+    <div class="pf-stats">${stat('Parameters',d.parameters_variants)}${stat('Context',d.context_window)}${stat('License',d.license)}${stat('Deployment',d.deployment_tier)}${stat('Region',d.region)}</div></div>`;
+  const tabs=[['over','Overview'],['vars','Versions'],['hw','Hardware'],['spec','Specs & sources']];
+  const bar = `<div class="pf-tabs">${tabs.map(([k,l],i)=>`<button class="pf-tab ${i?'':'on'}" data-p="${k}" onclick="pfTab('${k}')">${l}</button>`).join('')}</div>`;
+  sheet.innerHTML='';
+  sheet.classList.add('profile');
+  if(close) sheet.appendChild(close);
+  sheet.insertAdjacentHTML('beforeend', head+bar);
+  tabs.forEach(([k],i)=>{ const p=document.createElement('div'); p.className='pf-pane'+(i?'':' on'); p.dataset.p=k; panes[k].forEach(x=>p.appendChild(x)); sheet.appendChild(p); });
+}
+function pfTab(k){
+  document.querySelectorAll('#sheet .pf-tab').forEach(b=>b.classList.toggle('on', b.dataset.p===k));
+  document.querySelectorAll('#sheet .pf-pane').forEach(p=>p.classList.toggle('on', p.dataset.p===k));
+}
+function closeModal(){el('modal').classList.remove('open'); el('sheet').classList.remove('profile');}
 el('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeCompare();closeAbout();closeGlossary();closeBlogs();}});
 
@@ -672,12 +886,39 @@ function cmpCardHTML(d, badge){
     <button class="cmp-view-btn" onclick='closeCompare();openModal(${JSON.stringify(d).replace(/'/g,"&#39;")})'>View full details</button>
   </div>`;
 }
+
+function parseParamsB(str){
+  if(!str) return null; let best=null;
+  const re=/(\d+(?:\.\d+)?)\s*([TBM])\b/gi; let m;
+  while((m=re.exec(String(str)))){ let n=parseFloat(m[1]); const u=m[2].toUpperCase(); n = u==='T'?n*1000 : (u==='M'?n/1000:n); if(best===null||n>best) best=n; }
+  return best;
+}
+function fmtNum(n,u){ if(n==null) return 'not stated'; if(u==='B') return n>=1000?(n/1000).toFixed(1)+'T':(n>=10?Math.round(n):n.toFixed(1))+'B'; if(u==='GB') return (n>=1024?(n/1024).toFixed(1)+' TB':Math.round(n)+' GB'); if(u==='K') return n>=1e6?(n/1e6).toFixed(1)+'M':Math.round(n/1000)+'K'; return String(n); }
+const CB_COLORS=['#5b9dff','#ffa94d','#63c98a','#b388ff'];
+function cmpBarsHTML(models){
+  const rows=[
+    ['Model size (largest variant, parameters)', models.map(d=>parseParamsB(d.parameters_variants)),'B'],
+    ['Context window (largest figure stated)', models.map(d=>{const t=parseContextTokens(d.context_window);return t||null;}),'K'],
+    ['Minimum memory to run, 4-bit estimate', models.map(d=>parseGB(d.hw_min)),'GB'],
+  ];
+  const legend=models.map((d,i)=>`<span><span class="cb-dot" style="background:${CB_COLORS[i%4]}"></span>${escB(d.model_family)}</span>`).join('');
+  const body=rows.map(([label,vals,u])=>{
+    const max=Math.max(...vals.filter(v=>v!=null),0);
+    return `<div class="cb-row"><div class="cb-label">${label}</div>${models.map((d,i)=>{
+      const v=vals[i]; const w = (v!=null&&max>0)? Math.max(3, v/max*100):0;
+      return `<div class="cb-line"><span class="cb-name" title="${escB(d.model_family)}">${escB(d.model_family)}</span><div class="cb-track"><div class="cb-fill" style="width:${w}%;background:${CB_COLORS[i%4]}"></div></div><span class="cb-val">${fmtNum(v,u)}</span></div>`;}).join('')}</div>`;
+  }).join('');
+  return `<div class="cmpbars"><h4>Side by side</h4>
+    <p class="cb-note">Bars show size and capacity figures parsed from the catalog, scaled to the largest model selected. They do not rank quality: the catalog holds no independent benchmark scores. "Not stated" means the source gave no figure.</p>
+    <div class="cb-legend">${legend}</div>${body}</div>`;
+}
 function openCompare(){
   const models=[...compareSet].map(id=>DATA[id]);
   if(models.length<2) return;
   models.forEach(d=>{ if(!cmpTierState[d.__id]) cmpTierState[d.__id]='recommended'; });
   const badges = computeBadges(models);
   let h=`<span class="close" onclick="closeCompare()">&times;</span><h2>Compare (${models.length})</h2>`;
+  h+=cmpBarsHTML(models);
   h+=`<div class="cmp-grid">${models.map(d=>cmpCardHTML(d, badges[d.__id])).join('')}</div>`;
   el('cmpSheet').innerHTML=h;
   el('cmpModal').classList.add('open');
