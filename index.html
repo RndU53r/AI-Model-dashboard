@@ -184,6 +184,7 @@
   .blog-refs li{font-size:12.5px;line-height:1.55;margin:3px 0;word-break:break-word}
   .blog-refs a{color:var(--accent,#3b82f6)}
   .blog-note{font-size:12px;color:var(--muted);margin-top:14px}
+  .blog-disclaimer{font-size:12px;line-height:1.55;color:var(--muted);border:1px solid var(--line);border-left:3px solid #fcd34d;border-radius:8px;padding:9px 12px;margin:10px 0 14px}
   @media (max-width:1024px){.blog-mobile{display:inline-block}}
 </style>
 </head>
@@ -205,7 +206,7 @@
 <header>
   <div>
     <h1>AI Model Catalog &amp; Deployment Landscape</h1>
-    <div class="sub">Updated November 7, 2026, 06:39 UTC &middot; click a card for hardware &amp; download, or check "Compare" on up to 3 cards</div>
+    <div class="sub">Updated November 7, 2026, 06:43 UTC &middot; click a card for hardware &amp; download, or check "Compare" on up to 3 cards</div>
     <button class="blog-mobile" onclick="openBlogs()">Blogs: models and gaps</button>
   </div>
   <div class="stats" id="stats"></div>
@@ -424,6 +425,7 @@ function openGlossary(){
 }
 function closeGlossary(){ el('glossaryModal').classList.remove('open'); }
 const BLOGS = [{"id": "secops-executive", "audience": "Executive", "topic": "Security operations models and gaps", "title": "Is there an AI built for your security team's job? Mostly not yet", "summary": "We looked for trained AI models in eight security functions. Two have usable open options. Most of what vendors sell is a product or a general model.", "blocks": [["p", "Security vendors describe a lot of their software as AI. We asked a narrower question: for each security function, is there an AI model that has actually been trained for that job, can be obtained, and has published results? The answer is yes for two functions and no for most of the rest."], ["h", "Where the answer is yes"], ["p", "Network traffic monitoring has one strong open model, netFound from the University of California, Santa Barbara. It learns from the shape of network traffic rather than from text, and its authors report very high accuracy in detecting intrusions on a public test set. A public test set is not your network, so a pilot on your own traffic comes first."], ["p", "Vulnerability triage has two. The Computer Incident Response Center Luxembourg (CIRCL) publishes small models that predict how severe a newly reported flaw is and which attacker techniques it enables, and runs them in its own public service. Their honest accuracy is modest: about 74% on severity, once an earlier flattering figure was corrected by the authors themselves. They are good at speeding up the first sort, and an analyst still decides."], ["h", "Where the answer is not yet"], ["p", "We found no released, measured model for endpoint detection and response, insider-threat detection, firewall rule review or identity and access policy review. Research papers describe promising designs for insider threats and for limiting excess permissions, but none has released a model we could verify. Cloud configuration is partly covered: one research model writes and edits infrastructure code, though we found no public weights and it is not built to audit existing settings. The label CTEM, continuous threat exposure management, describes a product category, and we found no trained model behind it."], ["h", "What this means for planning"], ["p", "In the functions with no model built for the job, teams today either buy a vendor product or ask a general AI assistant to read their logs and settings. Both can work, and neither comes with independent accuracy figures. When a vendor says a product is powered by AI, ask which model, who tested it and on what data. The same weekly review that produces this catalog will flag a new trained model as soon as one appears."], ["p", "A limit on this work: for the research papers we read the abstracts and, where they exist, the model pages, not every paper in full, and every accuracy figure above is published by the authors. The references below link each source."]], "refs": [["netFound, arXiv 2310.17025", "https://arxiv.org/abs/2310.17025"], ["VLAI severity classifier model card, including the corrected accuracy note (CIRCL)", "https://huggingface.co/CIRCL/vulnerability-severity-classification-roberta-base"], ["TerraFormer, arXiv 2601.08734", "https://arxiv.org/abs/2601.08734"], ["DMFI insider threat framework, arXiv 2508.05694", "https://arxiv.org/abs/2508.05694"], ["ALPS least-privilege enforcement, arXiv 2603.25393", "https://arxiv.org/abs/2603.25393"]]}];
+const BLOG_DISCLAIMER = `<div class="blog-disclaimer"><b>Disclaimer.</b> These posts are written by AI and are not reviewed by a person on a continuous basis. They may contain errors or become outdated. Check the cited sources before relying on them.</div>`;
 let blogFilter = 'All';
 function escB(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function openBlogs(){ setActiveNav('navBlogs'); renderBlogList(); el('blogsModal').classList.add('open'); }
@@ -434,6 +436,7 @@ function renderBlogList(){
   const chip = f=>`<button class="blog-chip ${blogFilter===f?'on':''}" onclick="setBlogFilter('${f}')">${f}</button>`;
   el('blogsSheet').innerHTML = `<span class="close" onclick="closeBlogs()">&times;</span>
     <h2>Blogs: models and gaps</h2>
+    ${BLOG_DISCLAIMER}
     <div class="blog-note">One new post each week, written for either engineers (technical) or leadership (executive). Every post cites its sources. Figures reported only by a model's publisher are labelled as such.</div>
     ${new Set(BLOGS.map(b=>b.audience)).size>1?`<div class="blog-chips">${chip('All')}${chip('Technical')}${chip('Executive')}</div>`:''}
     ${posts.map(b=>`<div class="blog-card" onclick="openBlogPost('${b.id}')">
@@ -448,8 +451,9 @@ function openBlogPost(id){
   el('blogsSheet').innerHTML = `<span class="close" onclick="closeBlogs()">&times;</span>
     <button class="blog-back" onclick="renderBlogList()">&larr; All blogs</button>
     <div class="blog-body"><span class="blog-tag ${b.audience==='Technical'?'tech':'exec'}">${escB(b.audience)}</span><span class="blog-tag">${escB(b.topic)}</span>
-    <h2>${escB(b.title)}</h2>${body}
+    ${BLOG_DISCLAIMER}<h2>${escB(b.title)}</h2>${body}
     <div class="blog-refs"><b>References</b><ol>${refs}</ol></div>
+    ${BLOG_DISCLAIMER}
     <div class="blog-note">Written 2026-11-07 from the catalog's research date. Catalog entries and their sources are in the Catalog tab.</div></div>`;
   el('blogsModal').scrollTop = 0; el('blogsSheet').scrollTop = 0;
 }
